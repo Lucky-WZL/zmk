@@ -1,17 +1,25 @@
-if SHIELD_AM_HATSU_LEFT
+if SHIELD_AM_HATSU_DONGLE
 
 config ZMK_KEYBOARD_NAME
-	default "Am-Hatsu"
+	default "Am-Hatsu Dongle"
 
-config ZMK_SPLIT_BLE_ROLE_CENTRAL
+config ZMK_SPLIT_ROLE_CENTRAL
 	default y
-
-endif
-
-if SHIELD_AM_HATSU_LEFT || SHIELD_AM_HATSU_RIGHT
 
 config ZMK_SPLIT
 	default y
+
+# Number of peripherals (left + right = 2 for am_hatsu split keyboard)
+config ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS
+	default 2
+
+# BT_MAX_CONN = peripherals + BT profiles (default 5)
+config BT_MAX_CONN
+	default 7
+
+# BT_MAX_PAIRED = same as BT_MAX_CONN
+config BT_MAX_PAIRED
+	default 7
 
 if ZMK_DISPLAY
 
@@ -43,4 +51,45 @@ endchoice
 
 endif # LVGL
 
-endif
+endif # SHIELD_AM_HATSU_DONGLE
+
+if SHIELD_AM_HATSU_LEFT || SHIELD_AM_HATSU_RIGHT
+
+config ZMK_SPLIT
+	default y
+
+# When using dongle, left and right are both peripherals.
+# The cmake-args -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n should be
+# applied in the build configuration to override the default.
+
+if ZMK_DISPLAY
+
+config I2C
+	default y
+
+config SSD1306
+	default y
+
+config SSD1306_REVERSE_MODE
+	default y
+
+endif # ZMK_DISPLAY
+
+if LVGL
+
+config LV_Z_VDB_SIZE
+	default 64
+
+config LV_Z_DPI
+	default 148
+
+config LV_Z_BITS_PER_PIXEL
+	default 1
+
+choice LV_COLOR_DEPTH
+	default LV_COLOR_DEPTH_1
+endchoice
+
+endif # LVGL
+
+endif # SHIELD_AM_HATSU_LEFT || SHIELD_AM_HATSU_RIGHT
