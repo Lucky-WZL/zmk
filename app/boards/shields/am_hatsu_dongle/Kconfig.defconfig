@@ -1,0 +1,27 @@
+if SHIELD_AM_HATSU_DONGLE
+
+# Keyboard name (max 16 characters)
+config ZMK_KEYBOARD_NAME
+	default "Am-Hatsu"
+
+# Set this keyboard as the central (dongle) for split keyboard
+config ZMK_SPLIT_ROLE_CENTRAL
+	default y
+
+# Enable split keyboard support
+config ZMK_SPLIT
+	default y
+
+# Number of peripherals (left + right = 2 for am_hatsu split keyboard)
+config ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS
+	default 2
+
+# BT_MAX_CONN = peripherals + BT profiles (default 5)
+config BT_MAX_CONN
+	default 7
+
+# BT_MAX_PAIRED = same as BT_MAX_CONN
+config BT_MAX_PAIRED
+	default 7
+
+endif
