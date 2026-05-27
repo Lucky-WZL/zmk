@@ -3,12 +3,13 @@ id: am_hatsu_dongle
 name: AM-Hatsu Dongle
 type: shield
 url: https://github.com/Bastardkb/TBK-Mini
-requires: [nice_nano_v2]
+requires: [pro_micro]
 exposes: [i2c_oled]
 features:
-  - keys
-  - underglow
+  # - keys
   - split
   - bluetooth
 siblings:
-  - am_hatsu_dongle
+  - am_hatsu_left # 假设左半 shield 名
+  - am_hatsu_right # 假设右半 shield 名
+
